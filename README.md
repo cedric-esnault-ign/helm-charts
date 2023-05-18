@@ -13,7 +13,7 @@ See [publish.sh](publish.sh) :
 ```bash
 # login to github container registry
 docker login ghcr.io
-bash publish whoami
+bash publish.sh whoami
 ```
 
 ## LICENSE
