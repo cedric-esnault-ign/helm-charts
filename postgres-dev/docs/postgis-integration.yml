@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: postgis-integration
+spec:
+  containers:
+    - name: postgis-integration
+      image: ghcr.io/mborne/postgis-integration:master
+      command: ["/bin/sh", "-c", "--"]
+      args: ["while true; do sleep 30; done;"]
+      envFrom:
+      - configMapRef:
+          name: gis-postgres-dev-config
+      - secretRef:
+          name: gis-postgres-dev-user
+
