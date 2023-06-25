@@ -34,20 +34,20 @@ spec:
         - name: POSTGRES_USER
           valueFrom:
             secretKeyRef:
-              name: postgres-dev-user
+              name: {{ include "postgres-dev.fullname" . }}-user
               key: PGUSER
               optional: false
         - name: POSTGRES_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: postgres-dev-user
+              name: {{ include "postgres-dev.fullname" . }}-user
               key: PGPASSWORD
               optional: false
         ports:
         - containerPort: 5432
           name: postgres
         volumeMounts:
-        - name: postgres-dev-pvc
+        - name: data
           mountPath: /var/lib/postgresql/data
           {{- with .Values.nodeSelector }}
       nodeSelector:
@@ -63,10 +63,12 @@ spec:
       {{- end }}
   volumeClaimTemplates:
   - metadata:
-      name: postgres-dev-pvc
+      name: data
     spec:
       accessModes: [ "ReadWriteOnce" ]
-      #storageClassName: postgis-storage
+      {{- if .Values.persistence.storageClass }}
+      storageClassName: {{ .Values.persistence.storageClass }}
+      {{- end }}
       resources:
         requests:
-          storage: 20Gi
+          storage: {{ .Values.persistence.size | quote }}

@@ -12,7 +12,10 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
-podAnnotations: {}
+persistence:
+  #enabled: true
+  storageClass: ""
+  size: 8Gi
 
 podSecurityContext: {}
   # fsGroup: 2000
