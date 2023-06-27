@@ -5,10 +5,10 @@ A helm chart to deploy PostgreSQL in DEV mode.
 ## Motivation
 
 * Allow switching from official image (PostgreSQL) to derivative (ex : [postgis/postgis](https://registry.hub.docker.com/r/postgis/postgis/tags))
-* Generate password at installation
+* Generate password (once) at installation
 * Provide variables with standard names :
-  * ConfigMap (PGHOST, PGPORT,...)
-  * Secret (PGUSER, PGPASSWORD)*
+  * A ConfigMap with PGHOST, PGPORT and PGDATABASE=postgres (`${release_name}-postgres-dev-config`)
+  * A Secret with PGUSER=postgres, PGPASSWORD (`${release_name}-postgres-dev-user`)
 
 ## Usage
 
