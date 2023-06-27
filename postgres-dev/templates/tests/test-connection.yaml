@@ -8,8 +8,13 @@ metadata:
     "helm.sh/hook": test
 spec:
   containers:
-    - name: wget
-      image: busybox
-      command: ['wget']
-      args: ['{{ include "postgres-dev.fullname" . }}:{{ .Values.service.port }}']
+    - name: psql
+      image: postgres
+      command: ['psql']
+      args: ['-l']
+      envFrom:
+      - configMapRef:
+          name: gis-postgres-dev-config
+      - secretRef:
+          name: gis-postgres-dev-user
   restartPolicy: Never

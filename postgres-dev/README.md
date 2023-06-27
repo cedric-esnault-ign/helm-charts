@@ -15,12 +15,22 @@ A helm chart to deploy PostgreSQL in DEV mode.
 To deploy a PostgreSQL service named "gis-postgres-dev" :
 
 ```bash
+# To use postgis/postgis:15-3.3
 helm upgrade --install gis oci://ghcr.io/mborne/helm-charts/postgres-dev \
   --set image.repository=postgis/postgis --set image.tag=15-3.3
+
 # Follow displayed instruction...
 ```
 
 See also [docs/postgis-integration.yml](docs/postgis-integration.yml) to inject psql configuration (PGHOST, PGPORT, PGUSER, PGPASSWORD) using generated ConfigMap (gis-postgres-dev-config) and Secret (gis-postgres-dev-user).
+
+## Testing
+
+See [templates/tests/test-connection.yaml](templates/tests/test-connection.yaml) :
+
+```bash
+helm test gis --logs
+```
 
 ## Resources
 

@@ -43,6 +43,14 @@ spec:
               name: {{ include "postgres-dev.fullname" . }}-user
               key: PGPASSWORD
               optional: false
+        readinessProbe:
+          exec:
+            command:
+              - /bin/sh
+              - -c
+              - -e
+              - |
+                pg_isready -U "$POSTGRES_USER" -h 127.0.0.1 -p 5432
         ports:
         - containerPort: 5432
           name: postgres
