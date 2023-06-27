@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "postgres-dev.fullname" . }}-test-connection"
+  labels:
+    {{- include "postgres-dev.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: psql
+      image: postgres
+      command: ['psql']
+      args: ['-l']
+      envFrom:
+      - configMapRef:
+          name: gis-postgres-dev-config
+      - secretRef:
+          name: gis-postgres-dev-user
+  restartPolicy: Never

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "postgres-dev.fullname" . }}-config
+  labels:
+    {{- include "postgres-dev.labels" . | nindent 4 }}
+data:
+  PGHOST: {{ include "postgres-dev.fullname" . | squote }}
+  PGDATABASE: 'postgres'
+  PGPORT: {{ .Values.service.port | squote }}

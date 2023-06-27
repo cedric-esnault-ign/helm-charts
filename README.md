@@ -5,6 +5,7 @@
 ## Charts
 
 * [whoami](whoami/README.md)
+* [postgres-dev](postgres-dev/README.md)
 
 ## Notes about publishing
 

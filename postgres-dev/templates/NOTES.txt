@@ -1,0 +1,10 @@
+1. Port-forward to the service :
+
+kubectl -n {{ .Release.Namespace }} port-forward svc/{{ include "postgres-dev.fullname" . }} 15432:5432
+
+2. Open a new terminal to connect with psql :
+
+export PGPASSWORD=$(kubectl -n {{ .Release.Namespace }} get secrets {{ include "postgres-dev.fullname" . }}-user -o jsonpath='{.data.PGPASSWORD}' | base64 --decode)
+psql -h localhost -p 15432 -U postgres
+
+
