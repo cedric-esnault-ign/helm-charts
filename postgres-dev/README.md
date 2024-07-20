@@ -1,5 +1,7 @@
 # postgres-dev
 
+> **DEPRECATED: Prefer the use of an operator like [CloudNativePG](https://cloudnative-pg.io/)**
+
 A helm chart to deploy PostgreSQL in DEV mode.
 
 ## Motivation
