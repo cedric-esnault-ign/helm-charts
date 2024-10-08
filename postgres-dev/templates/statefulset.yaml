@@ -55,6 +55,8 @@ spec:
         - containerPort: 5432
           name: postgres
         volumeMounts:
+        - name: postgresrun
+          mountPath: /var/run/postgresql
         - name: data
           mountPath: /var/lib/postgresql/data
           {{- with .Values.nodeSelector }}
@@ -69,6 +71,10 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      volumes:
+        - name: postgresrun
+          emptyDir: 
+            sizeLimit: 80Mi
   volumeClaimTemplates:
   - metadata:
       name: data
