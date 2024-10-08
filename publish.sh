@@ -1,6 +1,6 @@
 #!/bin/bash
 
-GITHUB_USER=${GITHUB_USER:-mborne}
+GITHUB_USER=${GITHUB_USER:-cedric-esnault-ign}
 
 if [ -z "$1" ];
 then
